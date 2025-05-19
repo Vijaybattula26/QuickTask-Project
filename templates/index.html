@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+{% block title %}Your Tasks - QuickTask{% endblock %}
+
+{% block content %}
+<div class="fade-in">
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5>Add New Task</h5>
+      <form method="POST" action="{{ url_for('add') }}" class="row g-3 align-items-center">
+        <div class="col-md-5">
+          <input type="text" name="description" class="form-control" placeholder="Task description" required />
+        </div>
+        <div class="col-md-3">
+          <input type="date" name="due_date" class="form-control" />
+        </div>
+        <div class="col-md-2">
+          <select name="priority" class="form-select">
+            <option value="High">High Priority</option>
+            <option value="Normal" selected>Normal Priority</option>
+            <option value="Low">Low Priority</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-success w-100">Add Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <form method="GET" class="row g-3 mb-4 align-items-center">
+    <div class="col-md-4">
+      <input type="text" name="search" class="form-control" placeholder="Search tasks..." value="{{ search_query }}" />
+    </div>
+    <div class="col-md-3">
+      <select name="filter" class="form-select">
+        <option value="all" {% if filter_status == 'all' %}selected{% endif %}>All Tasks</option>
+        <option value="pending" {% if filter_status == 'pending' %}selected{% endif %}>Pending Tasks</option>
+        <option value="completed" {% if filter_status == 'completed' %}selected{% endif %}>Completed Tasks</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select name="sort" class="form-select">
+        <option value="due" {% if sort_by == 'due' %}selected{% endif %}>Sort by Due Date</option>
+        <option value="priority" {% if sort_by == 'priority' %}selected{% endif %}>Sort by Priority</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary w-100">Apply</button>
+    </div>
+  </form>
+
+  <ul class="list-group">
+    {% for task in tasks %}
+      <li class="list-group-item d-flex justify-content-between align-items-center {% if task.done %}done-task{% endif %}">
+        <div>
+          <input
+            type="checkbox"
+            class="form-check-input me-2 task-check"
+            data-id="{{ task.id }}"
+            {% if task.done %}checked{% endif %}
+          />
+          <strong>{{ task.description }}</strong>
+          {% if task.due_date %}
+            <small class="text-muted"> (Due: {{ task.due_date.strftime('%Y-%m-%d') }})</small>
+          {% endif %}
+          <span
+            class="badge
+              {% if task.priority == 'High' %}bg-danger
+              {% elif task.priority == 'Normal' %}bg-warning text-dark
+              {% else %}bg-info text-dark{% endif %}
+              ms-2
+            "
+            >{{ task.priority }}</span
+          >
+        </div>
+        <button class="btn btn-sm btn-outline-danger btn-delete" data-id="{{ task.id }}" aria-label="Delete task {{ task.description }}">Delete</button>
+      </li>
+    {% else %}
+      <li class="list-group-item text-center text-muted">No tasks found.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Delete task handler
+  document.querySelectorAll('.btn-delete').forEach(button => {
+    button.addEventListener('click', function () {
+      const taskId = this.getAttribute('data-id');
+      if (confirm('Are you sure you want to delete this task?')) {
+        fetch(`/delete/${taskId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token() if csrf_token else "" }}'
+          }
+        }).then(response => {
+          if (response.ok) {
+            location.reload();
+          } else {
+            alert('Failed to delete task.');
+          }
+        });
+      }
+    });
+  });
+
+  // Toggle task completion handler
+  document.querySelectorAll('.task-check').forEach(checkbox => {
+    checkbox.addEventListener('change', function () {
+      const taskId = this.getAttribute('data-id');
+      const done = this.checked;
+      fetch(`/toggle/${taskId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token() if csrf_token else "" }}'
+        },
+        body: JSON.stringify({ done: done })
+      }).then(response => {
+        if (!response.ok) {
+          alert('Failed to update task.');
+          this.checked = !done; // revert change on fail
+        } else {
+          location.reload();
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}

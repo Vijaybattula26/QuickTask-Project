@@ -1,0 +1,243 @@
+/* Modern Global Styles */
+body {
+    font-family: 'Nunito Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A more modern, friendly font */
+    background: linear-gradient(160deg, #f0f8ff, #e6f7ff); /* Softer, more subtle gradient */
+    color: #333; /* Darker, more readable text */
+    margin: 0;
+    padding: 60px 30px 90px; /* Adjusted padding for better spacing */
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center content vertically as well */
+    overflow-x: hidden; /* Prevent horizontal scrollbar */
+}
+
+/* Elevated Container */
+.container {
+    width: 500px; /* Slightly wider */
+    max-width: 95%;
+    background: #fff;
+    padding: 40px 50px; /* Increased padding */
+    border-radius: 16px; /* More rounded corners */
+    box-shadow:
+        0 8px 16px rgba(0, 0, 0, 0.06), /* Softer shadow */
+        0 20px 40px rgba(0, 0, 0, 0.04);
+    text-align: left;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smoother transitions */
+}
+
+.container:hover {
+    transform: translateY(-4px); /* Subtle lift on hover */
+    box-shadow:
+        0 12px 24px rgba(0, 0, 0, 0.08),
+        0 30px 60px rgba(0, 0, 0, 0.05);
+}
+
+/* Refined Input Fields */
+input[type="text"],
+input[type="password"],
+input[type="date"],
+select {
+    padding: 14px 16px; /* Slightly larger padding */
+    width: calc(100% - 32px); /* Account for padding in width calculation */
+    border: 1.5px solid #ccd1d9; /* Lighter border */
+    border-radius: 12px; /* More rounded */
+    font-size: 1.05rem; /* Slightly larger font */
+    color: #495057; /* Improved text color */
+    background-color: #f8f9fa; /* Softer background */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+    margin-bottom: 1rem; /* Add some bottom margin for spacing */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus {
+    border-color: #5cb85c; /* A more vibrant focus color */
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25); /* Softer focus shadow */
+}
+
+/* Modern Buttons */
+button, .btn {
+    padding: 14px 24px; /* More horizontal padding */
+    font-size: 1.05rem;
+    border-radius: 14px; /* More rounded */
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    background: linear-gradient(135deg, #5cb85c, #367c39); /* Updated gradient */
+    color: white;
+    box-shadow: 0 6px 15px rgba(76, 175, 80, 0.5); /* Softer, more vibrant shadow */
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+button:hover, .btn:hover {
+    background: linear-gradient(135deg, #367c39, #5cb85c); /* Reverse gradient on hover */
+    transform: translateY(-2px); /* Subtle lift on hover */
+    box-shadow: 0 8px 20px rgba(54, 124, 57, 0.6);
+}
+
+button:active, .btn:active {
+    transform: translateY(0); /* Reset transform on active state */
+    box-shadow: 0 4px 10px rgba(54, 124, 57, 0.5);
+}
+
+/* Secondary Button (Danger Style) */
+.btn-outline-danger {
+    background: transparent;
+    color: #dc3545; /* Standard danger color */
+    border: 1.5px solid #dc3545;
+    box-shadow: none;
+    padding: 10px 20px; /* Adjusted padding */
+    font-weight: 600;
+    border-radius: 12px; /* More rounded */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.5);
+}
+
+.btn-outline-danger:active {
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.5);
+}
+
+/* Modern List Styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 1rem 0; /* Add some vertical margin */
+}
+
+li {
+    padding: 18px 24px; /* Increased padding */
+    margin-bottom: 12px; /* Consistent bottom margin */
+    background: #fff; /* White background for list items */
+    border-radius: 16px; /* More rounded */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.05rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04); /* Softer shadow */
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+li:hover {
+    background-color: #f0f8ff; /* Light background on hover */
+    transform: translateY(-2px); /* Subtle lift on hover */
+    box-shadow: 0 4px 14px rgba(76, 175, 80, 0.1); /* Subtle vibrant shadow */
+}
+
+li.done-task {
+    text-decoration: line-through;
+    color: #868e96; /* Muted color for completed tasks */
+    background-color: #e9ecef; /* Lighter background for completed tasks */
+}
+
+/* Checkbox Styling */
+.task-check {
+    width: 22px; /* Slightly larger */
+    height: 22px;
+    cursor: pointer;
+    accent-color: #367c39; /* Updated accent color */
+    margin-right: 16px;
+    border-radius: 6px; /* Slightly rounded checkbox */
+    border: 1.5px solid #adb5bd; /* Subtle border */
+    appearance: none; /* Remove default appearance */
+    background-color: #fff;
+    display: inline-block;
+    position: relative;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.task-check:checked {
+    background-color: #367c39;
+    border-color: #367c39;
+}
+
+.task-check:checked::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -60%) rotate(45deg);
+}
+
+/* Link Styling */
+a {
+    margin-left: 12px;
+    text-decoration: none;
+    color: #367c39; /* Updated link color */
+    font-weight: 600;
+    transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
+}
+
+a:hover {
+    color: #285e2b; /* Darker shade on hover */
+    text-decoration: underline;
+}
+
+/* Modern Badge Styles */
+.badge {
+    font-weight: 600; /* Slightly lighter font weight */
+    padding: 0.6em 1em; /* Adjusted padding */
+    border-radius: 1.2rem; /* More rounded */
+    font-size: 0.85rem; /* Slightly smaller font */
+    user-select: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); /* Softer shadow */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.badge:hover {
+    transform: scale(1.05); /* Subtle scale on hover */
+}
+
+.badge.bg-danger {
+    background-color: #f8d7da; /* Lighter danger background */
+    color: #721c24; /* Darker text for contrast */
+}
+
+.badge.bg-warning {
+    background-color: #fff3cd; /* Lighter warning background */
+    color: #856404; /* Darker text for contrast */
+}
+
+.badge.bg-info {
+    background-color: #cce5ff; /* Lighter info background */
+    color: #004085; /* Darker text for contrast */
+}
+
+/* Enhanced Fade-In with Subtle Upward Movement */
+.fade-in {
+    opacity: 0;
+    transform: translateY(10px); /* Less pronounced initial translation */
+    animation: fadeSlideIn 0.6s ease-out forwards; /* Faster, smoother animation */
+}
+
+@keyframes fadeSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add a subtle focus ring style (optional, but good for accessibility) */
+*:focus-visible {
+    outline: 2px solid #5cb85c;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Font import (add this to your HTML's <head> or a separate CSS file) */
+/* <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet"> */
