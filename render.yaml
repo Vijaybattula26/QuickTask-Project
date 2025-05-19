@@ -1,0 +1,9 @@
+services:
+  - type: web
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: SECRET_KEY
+        value: 5cbcc28a9f9b3c1b30025c107be06486
